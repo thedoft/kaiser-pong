@@ -5,8 +5,12 @@
             <span class="points__player">{{ notKaiser.name }}</span>
         </div>
         <div class="points__scores">
-            <span class="points__score">{{ kaiser.scores }}</span>
-            <span class="points__score">{{ notKaiser.scores }}</span>
+            <div class="points__score-container">
+                <span class="points__score points__score_kaiser">{{ kaiser.scores }}</span>
+            </div>
+            <div class="points__score-container">
+                <span class="points__score points__score_not-kaiser">{{ notKaiser.scores }}</span>
+            </div>
         </div>
         <div class="points__scores-total">
             <span class="points__total">Всего: {{ kaiser.scoresTotal }}</span>
@@ -26,10 +30,56 @@ export default {
             notKaiser,
         };
     },
+    mounted() {
+        const kaiser = document.querySelector('.points__score_kaiser');
+        const notKaiser = document.querySelector('.points__score_not-kaiser');
+
+        const kaiserScores = kaiser.textContent;
+        const notKaiserScores = notKaiser.textContent;
+
+        if (kaiserScores > notKaiserScores) {
+            kaiser.classList.add('winner');
+            notKaiser.classList.add('looser');
+        } else if (kaiserScores < notKaiserScores) {
+            kaiser.classList.add('looser');
+            notKaiser.classList.add('winner');
+        } else {
+            kaiser.classList.add('balance');
+            notKaiser.classList.add('balance');
+        }
+    },
 };
 </script>
 
 <style>
+@keyframes scores-animation {
+    from,
+    to {
+        transform: scale(1.0);
+    }
+    50% {
+        transform: scale(5);
+    }
+}
+
+@keyframes winner-animation {
+    50% {
+        color: green;
+    }
+}
+
+@keyframes looser-animation {
+    50% {
+        color: red;
+    }
+}
+
+@keyframes balance-animation {
+    50% {
+        color: yellow;
+    }
+}
+
 .points {
     width: 80%;
     display: flex;
@@ -66,6 +116,10 @@ export default {
     border-right: 1px solid;
 }
 
+.points__score-container {
+    animation: scores-animation 3s ease-in-out 5s;
+}
+
 .points__score {
     font-weight: 900;
     font-size: 150px;
@@ -89,5 +143,15 @@ export default {
     .points__player {
         font-size: 22px;
     }
+}
+
+.winner {
+    animation: winner-animation 3s ease-in-out 5s;
+}
+.looser {
+    animation: looser-animation 3s ease-in-out 5s;
+}
+.balance {
+    animation: balance-animation 3s ease-in-out 5s;
 }
 </style>

@@ -1,6 +1,6 @@
 <template>
   <main class="main">
-    <h1 class="main__title">Kaizer-pong</h1>
+    <h1 class="main__title">Kaiser-pong</h1>
     <Points />
     <button class="main__button" @click="btnClick">Статистика</button>
     <Table :show="show" />
@@ -35,6 +35,27 @@ export default {
 </script>
 
 <style>
+@keyframes title {
+    from {
+        transform: rotate(0) translateX(0) translateY(0) scale(1.0);
+    }
+    20% {
+        transform: rotate(720deg) translateX(100%) translateY(800% ) scale(0.6);
+    }
+    40% {
+        transform: rotate(0) translateX(-100%) translateY(200% ) scale(0.2);
+    }
+    60% {
+        transform: rotate(720deg) translateX(100%) translateY(200% ) scale(0.2);
+    }
+    80% {
+        transform: rotate(0) translateX(-100%) translateY(800% ) scale(0.6);
+    }
+    to {
+      transform: rotate(720deg) translateX(0) translateY(0 ) scale(1.0);
+    }
+}
+
 .main {
   padding: 60px 0;
   display: flex;
@@ -48,6 +69,7 @@ export default {
   font-size: 64px;
   line-height: 1.2;
   margin: 0 auto 60px;
+  animation: title 4s ease-in-out 1s;
 }
 
 .main__button {

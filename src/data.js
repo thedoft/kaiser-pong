@@ -6,7 +6,7 @@ export const kaiser = {
 
 export const notKaiser = {
     name: 'неКайзер',
-    scores: 0,
+    scores: 1,
     scoresTotal: 0,
 };
 
